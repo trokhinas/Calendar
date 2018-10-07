@@ -7,7 +7,7 @@ public class Date {
     private int year;
 
     private int []months =
-            {30, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+            {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     public Date(int day, int month, int year) {
         this();
@@ -43,7 +43,19 @@ public class Date {
 
     public void addDay(int numOfDay) {
         if(numOfDay > 0) {
-
+            day += numOfDay;
+            while (day > dayOfYeaR(year)) {
+                day -= dayOfYeaR(year);
+                year++;
+            }
+            while (day > dayOfMonth(month)) {
+                day -= dayOfMonth(month);
+                month ++;
+                if(month > 12) {
+                    month = 1;
+                    year++;
+                }
+            }
         }
 
     }
@@ -53,18 +65,23 @@ public class Date {
     }
     public void addMonth(int numOfMonth) {
         if(numOfMonth > 0) {
-            month += numOfMonth;
-            year += month / 12;
-            month = month % 12;
+            for(int i = 0 ; i < numOfMonth ; i ++) {
+                addDay(dayOfMonth(month));
+            }
         }
     }
     public void addYear(int numOfYear) {
-        if(numOfYear > 0)
-            year += numOfYear;
+        if(numOfYear > 0) {
+            for(int i = 0 ; i < numOfYear ; i ++) {
+                addDay(dayOfYeaR(year));
+            }
+        }
     }
 
     public static void main(String[] args) {
-        Date d = new Date(9,9,1995);
+        Date d = new Date(31,1,2100);
+        System.out.println(d);
+        d.addDay(29);
         System.out.println(d);
     }
 }
