@@ -12,7 +12,7 @@ public enum Zodiac {
     TheArcher(23, 11, 22, 12, "Стрелец"),
     TheMountainSeaGot(23, 12, 20, 1, "Козел"),
     TheWaterBearer(21, 1, 19, 2, "Водолей"),
-    TheFish(20, 2, 22, 3, "Рыбы");
+    TheFish(20, 2, 20, 3, "Рыбы");
 
 
     int firstDay;

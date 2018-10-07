@@ -33,19 +33,7 @@ public class Date {
 
     public Date(int day, int month, int year) {
         this();
-        if(DateValidator.isCorrectDay(day)
-                && DateValidator.isCorrectMonth(month)
-                && DateValidator.isCorrectYear(year)) {
-            if(month == 2) {
-                if(DateValidator.isLeapYear(year)) {
-                    if(day > 29)
-                        return;
-                }
-                else {
-                    if(day > 28)
-                        return;
-                }
-            }
+        if(DateValidator.isCorrectDate(day, month, year)) {
             this.day = day;
             this.month = month;
             this.year = year;
@@ -177,6 +165,11 @@ public class Date {
             day = day > dayOfMonth(month) ? dayOfMonth(month) : day;
         }
     }
+
+    /**
+     *
+     * @return знак Зодиака для данной даты.
+     */
     public Zodiac getZodiac() {
         for (Zodiac z :
                 Zodiac.values()) {
@@ -191,25 +184,16 @@ public class Date {
     }
 
     public static void main(String[] args) {
-        Date d = new Date(6,10,2005);
-        System.out.println(d);
-        System.out.println(d.getZodiac());
-
-
-        /*d.addMonth(12);
-        System.out.println(d);
-
-        d.addDay(365);
-        System.out.println(d);*/
-
-        //d.postponeForYear(4);
-        d.postponeForMonth(18);
-        System.out.println(d);
-
-        /*for (Zodiac z: Zodiac.values()
-             ) {
-            System.out.println(z);
-        }*/
+        Date d = new Date(1,1,1998);
+        for(int i = 0 ; i < 12 ; i ++) {
+            System.out.println(d.getZodiac());
+            d.postponeForMonth(1);
+        }
+//        System.out.println(d);
+//        System.out.println(d.getZodiac());
+//        d.postponeForMonth(1);
+//        System.out.println(d);
+//        System.out.println(d.getZodiac());
     }
 }
 
