@@ -9,9 +9,6 @@ public class DateValidator {
     public static boolean isCorrectYear(int year) {
         return year > 0;
     }
-    public static boolean isCorrectWeek(int week) {
-        return week > 0 && week <= 52;
-    }
     public static boolean isLeapYear(int year) {
         /*
           год, номер которого кратен 400, — високосный;
