@@ -57,6 +57,16 @@ public class Date {
         year = 1970;
     }
 
+    public int getDay() {
+        return day;
+    }
+    public int getMonth() {
+        return month;
+    }
+    public int getYear() {
+        return year;
+    }
+
     @Override
     public String toString() {
         String dayS = day >= 10 ? String.valueOf(day) : "0"+day;
@@ -158,18 +168,32 @@ public class Date {
      */
     public void postponeForMonth(int numOfMonth) {
         if(numOfMonth > 0) {
-            month += numOfMonth;
+            addYear(numOfMonth / 12);
+            month += numOfMonth % 12;
             if(month > 12) {
-                year += month / 12;
-                month %= 12;
+                month -= 12;
+                year ++;
             }
             day = day > dayOfMonth(month) ? dayOfMonth(month) : day;
         }
     }
+    public Zodiac getZodiac() {
+        for (Zodiac z :
+                Zodiac.values()) {
+                if(month == z.firstMonth) {
+                    if (day >= z.firstDay) return z;
+                }
+                else if(month == z.lastMonth) {
+                    if (day <= z.lastDay) return z;
+                }
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
-        Date d = new Date(29,2,2004);
+        Date d = new Date(6,10,2005);
         System.out.println(d);
+        System.out.println(d.getZodiac());
 
 
         /*d.addMonth(12);
@@ -179,7 +203,13 @@ public class Date {
         System.out.println(d);*/
 
         //d.postponeForYear(4);
-        d.addYear(2);
+        d.postponeForMonth(18);
         System.out.println(d);
+
+        /*for (Zodiac z: Zodiac.values()
+             ) {
+            System.out.println(z);
+        }*/
     }
 }
+
