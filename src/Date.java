@@ -17,9 +17,9 @@ public class Date {
     * */
     private final int LEAP_YEAR_DAYS = 366;
     private final int YEAR_DAYS = 365;
-    //технически это не константа, но тут ему самое место
-    private int []months =
-            {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private final int DEFAULT_DAY = 1;
+    private final int DEFAULT_MONTH = 1;
+    private final int DEFAULT_YEAR = 1970;
 
     /*
     Приватные поля хранящие день, месяц и год соответственно
@@ -27,8 +27,6 @@ public class Date {
     private int day;
     private int month;
     private int year;
-
-
 
 
     public Date(int day, int month, int year) {
@@ -40,11 +38,10 @@ public class Date {
         }
     }
     public Date() {
-        day = 1;
-        month = 1;
-        year = 1970;
+        day = DEFAULT_DAY;
+        month = DEFAULT_MONTH;
+        year = DEFAULT_YEAR;
     }
-
     public int getDay() {
         return day;
     }
@@ -54,7 +51,6 @@ public class Date {
     public int getYear() {
         return year;
     }
-
     @Override
     public String toString() {
         String dayS = day >= 10 ? String.valueOf(day) : "0"+day;
@@ -68,7 +64,7 @@ public class Date {
      * @return число дней конкретного месяца
      */
     private int dayOfMonth(int month) {
-        int result = months[month - 1];
+        int result = Month.values()[month - 1].getDay();
         if(month != 2)
             return result;
         return DateValidator.isLeapYear(year) ? result + 1 : result;
@@ -128,7 +124,7 @@ public class Date {
      *                   за месяц считать, количество дней в текущем месяце. Т.е, если
      *                   текущий месяц январь, то прибавится 31 день и так далее для месяцев.
      */
-    public void addMonth(int numOfMonth) {
+    public void addMonth(int numOfMonth) {// довольно странный метод  =)
         if(numOfMonth > 0) {
             for(int i = 0 ; i < numOfMonth ; i ++) {
                 addDay(dayOfMonth(month));
@@ -143,7 +139,7 @@ public class Date {
      */
     public void addYear(int numOfYear) {
         if(numOfYear > 0) {
-            year += numOfYear;
+            postponeForMonth(numOfYear * 12);
         }
     }
 
@@ -156,7 +152,7 @@ public class Date {
      */
     public void postponeForMonth(int numOfMonth) {
         if(numOfMonth > 0) {
-            addYear(numOfMonth / 12);
+            year += numOfMonth / 12;
             month += numOfMonth % 12;
             if(month > 12) {
                 month -= 12;
@@ -184,16 +180,35 @@ public class Date {
     }
 
     public static void main(String[] args) {
-        Date d = new Date(1,1,1998);
-        for(int i = 0 ; i < 12 ; i ++) {
-            System.out.println(d.getZodiac());
-            d.postponeForMonth(1);
-        }
+        Date d = new Date(29,2,2016);
+        System.out.println(d);
+        d.addYear(4);
+        System.out.println(d);
+        d.postponeForMonth(48);
+        System.out.println(d);
+        d.addYear(1);
+        System.out.println(d);
+//        d.addWeek(52);
+//        d.addDay(1);
+//
+////        d.addDay(365);
 //        System.out.println(d);
-//        System.out.println(d.getZodiac());
-//        d.postponeForMonth(1);
+//        d.addYear(1);
 //        System.out.println(d);
-//        System.out.println(d.getZodiac());
-    }
+//        d.postponeForMonth(12);
+//        System.out.println(d);
+//        d.addMonth(12);
+//        System.out.println(d);
+////        for(int i = 0 ; i < 12 ; i ++) {
+////            System.out.println(d.getZodiac());
+////            d.postponeForMonth(1);
+////        }
+//////      System.out.println(d);
+////        System.out.println(d.getZodiac());
+////        d.postponeForMonth(1);
+////        System.out.println(d);
+////        System.out.println(d.getZodiac());
+//    }
+}
 }
 

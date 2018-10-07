@@ -11,10 +11,10 @@ public class DateValidator {
     }
     public static boolean isCorrectDate(int day, int month, int year) {
         if(isCorrectDay(day) && isCorrectMonth(month) && isCorrectYear(year)) {
-            if(month == 2){
-                return isLeapYear(year) ? day <= 29 : day <= 28;
-            }
-            return true;
+            int dayOfMonth = Month.values()[month - 1].getDay();
+            if(month == 2)
+                dayOfMonth = isLeapYear(year) ? dayOfMonth + 1 : dayOfMonth;
+            return day <= dayOfMonth;
         }
         return false;
     }
