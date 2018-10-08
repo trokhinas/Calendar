@@ -11,7 +11,7 @@ public class DateValidator {
     }
     public static boolean isCorrectDate(int day, int month, int year) {
         if(isCorrectDay(day) && isCorrectMonth(month) && isCorrectYear(year)) {
-            int dayOfMonth = Month.values()[month - 1].getDay();
+            int dayOfMonth = Month.values()[month].getDay();
             if(month == 2)
                 dayOfMonth = isLeapYear(year) ? dayOfMonth + 1 : dayOfMonth;
             return day <= dayOfMonth;

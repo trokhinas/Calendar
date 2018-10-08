@@ -1,5 +1,6 @@
 public enum Month {
 
+    EMPTY(0),
     January(31),
     February(28),
     March(31),

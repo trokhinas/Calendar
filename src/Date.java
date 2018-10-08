@@ -4,13 +4,6 @@
  *
  * Автор Трохин А.С.
  */
-
-
-/*
-* Осталось реализовать проверку на февраль в конструкторе
-* И добавить знаки Зодиака
-* */
-
 public class Date {
     /*
     Константы
@@ -64,7 +57,7 @@ public class Date {
      * @return число дней конкретного месяца
      */
     private int dayOfMonth(int month) {
-        int result = Month.values()[month - 1].getDay();
+        int result = Month.values()[month].getDay();
         if(month != 2)
             return result;
         return DateValidator.isLeapYear(year) ? result + 1 : result;
@@ -84,18 +77,13 @@ public class Date {
      * @param numOfDay - количество прибавляемых дней.
      *                 В этом метода все достаточно просто:
      *                 1)Записывается общая сумма дней.
-     *                 2)Затем, проходит цикл по годам, вычитая из количества дней
-     *                 количество дней в текущем году.
-     *                 3)Следующий цикл по месяцам: аналогично циклу по годам, только
-     *                 с месяцами.
+     *                 2)Проходит цикл по месяцам: вычитая из количества дней
+     *                 количество дней в текущем месяце году.
+     *
      */
     public void addDay(int numOfDay) {
         if(numOfDay > 0) {
             day += numOfDay;
-            while (day > dayOfYeaR(year)) {
-                day -= dayOfYeaR(year);
-                year++;
-            }
             while (day > dayOfMonth(month)) {
                 day -= dayOfMonth(month);
                 month ++;
@@ -123,6 +111,7 @@ public class Date {
      *                   Поскольку месяц - понятие растяжимое, то было принято решение
      *                   за месяц считать, количество дней в текущем месяце. Т.е, если
      *                   текущий месяц январь, то прибавится 31 день и так далее для месяцев.
+     * Скорее всего этот метод асболютно неверный с точки зрения логики
      */
     public void addMonth(int numOfMonth) {// довольно странный метод  =)
         if(numOfMonth > 0) {
@@ -182,33 +171,8 @@ public class Date {
     public static void main(String[] args) {
         Date d = new Date(29,2,2016);
         System.out.println(d);
-        d.addYear(4);
+        d.addDay(365);
         System.out.println(d);
-        d.postponeForMonth(48);
-        System.out.println(d);
-        d.addYear(1);
-        System.out.println(d);
-//        d.addWeek(52);
-//        d.addDay(1);
-//
-////        d.addDay(365);
-//        System.out.println(d);
-//        d.addYear(1);
-//        System.out.println(d);
-//        d.postponeForMonth(12);
-//        System.out.println(d);
-//        d.addMonth(12);
-//        System.out.println(d);
-////        for(int i = 0 ; i < 12 ; i ++) {
-////            System.out.println(d.getZodiac());
-////            d.postponeForMonth(1);
-////        }
-//////      System.out.println(d);
-////        System.out.println(d.getZodiac());
-////        d.postponeForMonth(1);
-////        System.out.println(d);
-////        System.out.println(d.getZodiac());
-//    }
-}
+    }
 }
 
