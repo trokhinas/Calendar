@@ -169,10 +169,18 @@ public class Date {
     }
 
     public static void main(String[] args) {
-        Date d = new Date(29,2,2016);
+        Date d = new Date();
         System.out.println(d);
-        d.addDay(365);
+        java.util.Date a = new java.util.Date();
+        long time = a.getTime();
+        time /= 1000;
+        time /= 3600;
+        time /= 24;
+        d.addDay((int) time);
         System.out.println(d);
+        System.out.println();
+
+
     }
 }
 

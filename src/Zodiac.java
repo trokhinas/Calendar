@@ -27,6 +27,7 @@ public enum Zodiac {
         this.lastMonth = lastMonth;
         this.title = title;
     }
+
     @Override
     public String toString() {
         String fM = firstMonth < 10 ? "0"+firstMonth : String.valueOf(firstMonth);

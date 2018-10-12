@@ -22,4 +22,9 @@ public enum Month {
     public int getDay() {
         return day;
     }
+
+    @Override
+    public String toString() {
+        return super.name();
+    }
 }
